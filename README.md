@@ -1,6 +1,32 @@
-# React + TypeScript + Vite
+# A React-based 3D viewer for applying custom textures to models with real-time transformations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![App Screenshot](./public/screenshot.png) 
+
+
+## Key Features
+
+- **Dynamic Model Loading**: Fetches GLB models and measurements from API endpoint
+- **Multi-Texture Support**: 
+  - Upload and overlap multiple textures (currently supports more than two uploads, but can be limited to two if needed)
+  - Textures stack in array order (last uploaded appears on top)
+  - Individual texture removal capability
+- **Precise Texture Control**:
+  - Position adjustment (X/Y axis)
+  - Scale transformation
+  - color quantization (hard-coded black/white)
+- **Responsive Design**: Adapts to desktop 
+- **Dimension Control**: Adjust model size within API-specified limits
+
+## Technical Implementation
+
+### Core Technologies
+- **Three.js** via React Three Fiber (R3F)
+- **Drei** for Three.js helpers and abstractions
+- **Vite** for ultra-fast development builds
+
+## Requirements
+- Node.js (v14+)
+- npm or yarn
 
 ## Installation
 1. Clone the repository

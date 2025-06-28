@@ -15,6 +15,7 @@
 
 .canvas-container {
   flex: 1;
+  min-height: 50vh; /* for mobile */
 }
 
 .loading, .error {
@@ -50,3 +51,45 @@ input[type="range"] {
   margin-bottom: 10px;
 }
 
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    height: 100vh;
+    min-height: 100vh;
+    /* overflow-y: auto; */
+  }
+
+  .controls-panel {
+    max-width: 94vw;
+    order: 2;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+  }
+
+  .canvas-container {
+    order: 1; /* Canvas comes first */
+    height: 60vh; 
+    min-height: 60vh;
+    flex-shrink: 0;
+
+  }
+
+  /* Adjust control sections for mobile */
+  .control-section {
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .canvas-container {
+    height: 50vh;
+    min-height: 50vh;
+  }
+  
+  .texture-header {
+    gap: 50px; /* Reduce gap between texture header items */
+  }
+}

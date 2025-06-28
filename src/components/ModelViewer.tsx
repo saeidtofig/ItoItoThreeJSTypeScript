@@ -90,6 +90,13 @@ export default function ModelViewer({ modelUrl, textures, dimensions }: ModelVie
   useEffect(() => {
     if (material && textures.length > 0 && model) {
       const combinedMat = createCombinedMaterial()
+
+      // Dispose previous material before replacing
+      if (material) {
+        material.map?.dispose() 
+        material.dispose() 
+      }
+
       if (combinedMat) {
         setMaterial(combinedMat)
         model.traverse((child: THREE.Object3D) => {

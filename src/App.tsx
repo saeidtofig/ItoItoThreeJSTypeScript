@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { useState, useEffect } from 'react'
 import useApiData from './hooks/useApiData'
+import ModelViewer from './components/ModelViewer'
 import TextureControls from './components/TextureControls'
 import DimensionControls from './components/DimensionControls'
 import type { Dimensions } from './types/app';
@@ -42,6 +43,13 @@ export default function App() {
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} />
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+          {modelUrl && (
+            <ModelViewer 
+              modelUrl={modelUrl} 
+              textures={textures} 
+              dimensions={dimensions} 
+            />
+          )}
         </Canvas>
       </div>
     </div>

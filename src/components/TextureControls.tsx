@@ -53,7 +53,7 @@ export default function TextureControls({ textures, setTextures }: TextureContro
     setTextures(newTextures)
   }
 
-  function handleUpTexture(index: number){
+  function handlDownTexture(index: number){
     if(index>=textures.length-1) return;
 
     const newTexture=[...textures];
@@ -81,8 +81,8 @@ export default function TextureControls({ textures, setTextures }: TextureContro
             <button onClick={() => removeTexture(index)}>Remove</button>
           </div>
           <button
-            onClick={() => { handleUpTexture(index) }}>
-            Up
+            onClick={() => { handlDownTexture(index) }}>
+            Down
           </button>
           <div className="transform-controls">
             <label>Scale:

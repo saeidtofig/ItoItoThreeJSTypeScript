@@ -11,7 +11,7 @@ export default function useApiData() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://raw.githubusercontent.com/oneone-studio/interview-assets/refs/heads/main/api.json'
+          'https://raw.githubusercontent.com/saeidtofig/ItoItoThreeJSTypeScript/main/public/api.json'
         )
         if (!response.ok) throw new Error('Network response was not ok')
         const json = await response.json()

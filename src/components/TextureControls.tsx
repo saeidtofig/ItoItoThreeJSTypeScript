@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import type { TextureControlsProps , TextureTransform } from '../types/app';
+import type { TextureControlsProps, TextureTransform } from '../types/app';
 
 
 export default function TextureControls({ textures, setTextures }: TextureControlsProps) {
@@ -13,7 +13,7 @@ export default function TextureControls({ textures, setTextures }: TextureContro
       image.onload = () => {
         const texture = new THREE.Texture(image)
         texture.needsUpdate = true
-        texture.colorSpace  = THREE.SRGBColorSpace
+        texture.colorSpace = THREE.SRGBColorSpace
         // Store transform directly on the texture
         texture.userData = {
           transform: {
@@ -21,7 +21,7 @@ export default function TextureControls({ textures, setTextures }: TextureContro
             position: { x: 0, y: 0 }
           } as TextureTransform
         }
-        
+
         // Add new texture to the end of the array
         setTextures([...textures, texture])
       }
@@ -33,16 +33,16 @@ export default function TextureControls({ textures, setTextures }: TextureContro
   const updateTransform = (index: number, key: keyof TextureTransform | 'position', value: number | { x: number, y: number }) => {
     const newTextures = [...textures]
     if (!newTextures[index]) return
-    
+
     if (typeof value === 'object') {
-      newTextures[index].userData.transform.position = { 
-        ...newTextures[index].userData.transform.position, 
-        ...value 
+      newTextures[index].userData.transform.position = {
+        ...newTextures[index].userData.transform.position,
+        ...value
       }
     } else {
       (newTextures[index].userData.transform[key as keyof TextureTransform] as number) = value
     }
-    
+
     // Mark texture for update
     newTextures[index].needsUpdate = true
     setTextures(newTextures)
@@ -52,6 +52,16 @@ export default function TextureControls({ textures, setTextures }: TextureContro
     const newTextures = textures.filter((_, i) => i !== index)
     setTextures(newTextures)
   }
+
+  function handleUpTexture(index: number){
+    if(index>=textures.length-1) return;
+
+    const newTexture=[...textures];
+    [newTexture[index],newTexture[index+1]]=[newTexture[index+1],newTexture[index]];
+    setTextures(newTexture);
+
+  }
+
 
   return (
     <div className="control-section">
@@ -63,13 +73,17 @@ export default function TextureControls({ textures, setTextures }: TextureContro
           onChange={handleTextureUpload}
         />
       </div>
-      
+
       {textures.map((texture, index) => (
         <div key={index} className="texture-control">
           <div className="texture-header">
             <h4>Texture {index + 1}</h4>
             <button onClick={() => removeTexture(index)}>Remove</button>
           </div>
+          <button
+            onClick={() => { handleUpTexture(index) }}>
+            Up
+          </button>
           <div className="transform-controls">
             <label>Scale:
               <input
@@ -88,9 +102,10 @@ export default function TextureControls({ textures, setTextures }: TextureContro
                 max="1"
                 step="0.1"
                 value={texture.userData.transform.position.x}
-                onChange={(e) => updateTransform(index, 'position', { 
+                onChange={(e) => updateTransform(index, 'position', {
                   x: parseFloat(e.target.value),
-                  y: texture.userData.transform.position.y })}
+                  y: texture.userData.transform.position.y
+                })}
               />
             </label>
             <label>Position Y:
@@ -100,9 +115,10 @@ export default function TextureControls({ textures, setTextures }: TextureContro
                 max="1"
                 step="0.1"
                 value={texture.userData.transform.position.y}
-                onChange={(e) => updateTransform(index, 'position', { 
+                onChange={(e) => updateTransform(index, 'position', {
                   y: parseFloat(e.target.value),
-                  x: texture.userData.transform.position.x})}
+                  x: texture.userData.transform.position.x
+                })}
               />
             </label>
           </div>

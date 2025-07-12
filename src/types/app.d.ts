@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import type { Dispatch, SetStateAction } from 'react'
 
 export interface Dimensions {
   x: number;
@@ -22,7 +21,7 @@ export interface TextureTransform {
 }
 
 // Extended Three.js types
-declare module 'app' {
+declare module 'three' {
   interface Texture {
     userData: {
       transform: TextureTransform;

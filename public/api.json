@@ -1,0 +1,8 @@
+{
+  "model": "https://raw.githubusercontent.com/oneone-studio/interview-assets/refs/heads/main/model.glb",
+  "measurements": {
+    "x": { "min": 10, "max": 200, "value": 100 },
+    "y": { "min": 10, "max": 200, "value": 100 },
+    "z": { "min": 10, "max": 200, "value": 100 }
+  }
+}
